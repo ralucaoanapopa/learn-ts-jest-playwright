@@ -20,5 +20,54 @@
    }
 ```
 
-4. Install de dependencies by:
+4. Install dev dependencies by:
 > npm i
+
+5. Configure `typescript`
+
+Typescript file will be compiled in javascript so need to:
+- create tsconfig.json in order to specify compiler
+```
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "strict": true,
+        "module": "commonjs",
+        "sourceMap": true
+    }
+}
+```
+
+6. Configure `jest` in `package.json`
+```
+"jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+```
+
+```
+  "scripts": {
+    "test": "jest"
+  }
+```
+
+# Run tests
+
+> npm test
+
+# Resources
+
+## Tools & frameworks
+- [TypeScript](https://www.typescriptlang.org/docs/handbook/intro.html)
+- [Playwright](https://playwright.dev/docs/intro)
+- [JEST - javascript testing framework](https://jestjs.io/)
