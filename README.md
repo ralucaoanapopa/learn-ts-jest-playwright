@@ -71,3 +71,8 @@ Typescript file will be compiled in javascript so need to:
 - [TypeScript](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [Playwright](https://playwright.dev/docs/intro)
 - [JEST - javascript testing framework](https://jestjs.io/)
+
+## Free websites for UI testing
+- [DemoQA](https://demoqa.com/)
+- [UI elements on herokuapp](https://the-internet.herokuapp.com/)
+- [Test pages for automating](https://testpages.herokuapp.com/styled/index.html)
