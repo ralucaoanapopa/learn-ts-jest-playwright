@@ -61,6 +61,14 @@ Typescript file will be compiled in javascript so need to:
   }
 ```
 
+7. Configure `dotenv` in order to use environment variables (for secrets)
+
+Decided to use [this package](https://www.npmjs.com/package/dotenv) because it has 0 dependencies.
+
+> npm install dotenv --save
+
+[Use dotenv with import](https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import)
+
 # Run tests
 
 > npm test
@@ -71,6 +79,7 @@ Typescript file will be compiled in javascript so need to:
 - [TypeScript](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [Playwright](https://playwright.dev/docs/intro)
 - [JEST - javascript testing framework](https://jestjs.io/)
+
 
 ## Free websites for UI testing
 - [DemoQA](https://demoqa.com/)
