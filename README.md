@@ -69,9 +69,17 @@ Decided to use [this package](https://www.npmjs.com/package/dotenv) because it h
 
 [Use dotenv with import](https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import)
 
+8. Install `jest-cli`
+
+> npm i -g jest-cli
+
 # Run tests
 
 > npm test
+
+OR
+
+> jest <test_suite.test.ts>
 
 # Generate code with codegen
 
