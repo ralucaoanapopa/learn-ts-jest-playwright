@@ -10,6 +10,7 @@ describe('Launch Browser', () => {
         const page = await context.newPage();
         await page.goto(baseURL);
 
+        await context.close();
         await browser.close();
     });
 });

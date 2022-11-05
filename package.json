@@ -36,7 +36,8 @@
       "jsx",
       "json",
       "node"
-    ]
+    ],
+    "testTimeout": 30000
   },
   "dependencies": {
     "dotenv": "^16.0.3"
