@@ -11,26 +11,26 @@ export default class LoginPage {
         return this.page.locator("input[id='userName']");
     }
 
-    public get elementPasswordTextField() {
-        return this.page.locator("input[id='password']");
-    }
+    // short way of writing same thing:
+    elementPasswordTextField = async () => this.page.locator("input[id='password']");
 
     public get elementLoginBtn() {
         return this.page.locator("button[id='login']");
     }
 
     public async enterUserName(username: string){
-        const elem = await this.elementEmailTextField;
+        const elem = this.elementEmailTextField;
         await elem?.fill(username);
     }
 
     public async enterPassword(password: string){
-        const elem = await this.elementPasswordTextField;
+        // we need to use `await` because that function returns a Promise.
+        const elem = await this.elementPasswordTextField();
         await elem?.fill(password);
     }
 
     public async clickLoginBtn(){
-        const elem = await this.elementLoginBtn;
+        const elem = this.elementLoginBtn;
         await elem?.click();
     }
 
@@ -38,6 +38,10 @@ export default class LoginPage {
         await this.enterUserName(username);
         await this.enterPassword(password);
         await this.clickLoginBtn();
-    }   
+    }
+
+    public get errorLoginMsg() {
+        return this.page.locator("//p[@id='name']");
+    }
     
 }
