@@ -91,7 +91,7 @@ OR
 
 # Results
 
-![All tests](results/all_tests_jest_playwright.png "All tests")
+![All tests](results\all_tests_jest_playwright.PNG "All tests")
 
 # Generate code with codegen
 
