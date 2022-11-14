@@ -1,6 +1,7 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 import LoginPage from "../../page/loginPage.test";
 import BooksPage from "../../page/booksPage.test";
+import * as data from '../../data/variables.json';
 import * as dotenv from 'dotenv'
 dotenv.config()
 
@@ -61,15 +62,15 @@ describe('Test login form', () => {
 
     test('Login with invalid password', async () => {
         expect(page.url()).toBe(loginURL);
-        await login.login_form(username, 'invalid');
+        await login.login_form(username, data.invalidData);
 
-        expect(await login.errorLoginMsg.innerText()).toBe('Invalid username or password!');
+        expect(await login.errorLoginMsg.innerText()).toBe(data.errorMsgLogin);
     });
 
     test('Login with invalid username', async () => {
         expect(page.url()).toBe(loginURL);
-        await login.login_form('invalid', password);
+        await login.login_form(data.invalidData, password);
 
-        expect(await login.errorLoginMsg.innerText()).toBe('Invalid username or password!');
+        expect(await login.errorLoginMsg.innerText()).toBe(data.errorMsgLogin);
     });
 });
