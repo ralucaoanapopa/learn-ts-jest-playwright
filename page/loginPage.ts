@@ -20,7 +20,9 @@ export default class LoginPage {
 
     public async enterUserName(username: string){
         const elem = this.elementEmailTextField;
-        await elem?.fill(username);
+        if (elem != null)
+            await elem.fill(username);
+        else throw new Error('Element input field for username is not found');   
     }
 
     public async enterPassword(password: string){
