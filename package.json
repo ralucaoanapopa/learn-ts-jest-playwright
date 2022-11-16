@@ -37,7 +37,7 @@
       "json",
       "node"
     ],
-    "testTimeout": 30000
+    "testTimeout": 35000
   },
   "dependencies": {
     "dotenv": "^16.0.3"
