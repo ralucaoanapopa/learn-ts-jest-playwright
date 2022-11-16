@@ -20,6 +20,30 @@ export default class BooksPage {
         return this.page.locator(usernameValue_id);
     }
 
+    public get book_header() {
+        return this.page.locator("xpath=//div[@class='main-header']");
+    }
+
+    public get table_head() {
+        return this.page.locator(".rt-thead.-header");
+    }
+
+    public get table_header_columns() {
+        return this.page.$$(".rt-resizable-header-content");
+    }
+
+    public get table_body() {
+        return this.page.locator(".rt-tbody");
+    }
+
+    public get table_body_rows() {
+        return this.page.$$(".rt-tr-group");
+    }
+
+    public get all_book_titles() {
+        return this.page.$$("xpath=//span[@class='mr-2']");
+    }
+
     public async clickLoginBtn() {
         const elem = this.elementLoginBtn;
         await elem?.click();
