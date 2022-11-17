@@ -34,27 +34,27 @@ export default class BooksPage extends BasePage {
         return this.page.locator(usernameValue_id);
     }
 
-    public get book_header() {
+    public get bookHeader() {
         return this.page.locator("xpath=//div[@class='main-header']");
     }
 
-    public get table_head() {
+    public get tableHead() {
         return this.page.locator(".rt-thead.-header");
     }
 
-    public get table_header_columns() {
+    public get tableHeaderColumns() {
         return this.page.$$(".rt-resizable-header-content");
     }
 
-    public get table_body() {
+    public get tableBody() {
         return this.page.locator(".rt-tbody");
     }
 
-    public get table_body_rows() {
+    public get tableBodyRows() {
         return this.page.$$(".rt-tr-group");
     }
 
-    public get all_book_titles() {
+    public get allBookTitles() {
         return this.page.$$("xpath=//span[@class='mr-2']");
     }
 

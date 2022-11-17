@@ -1,12 +1,12 @@
 {
     "errorMsgLogin": "Invalid username or password!",
     "invalidData": "invalid",
-    "book_store_header": "Book Store",
-    "table_column_one": "Image",
-    "table_column_two": "Title",
-    "table_column_three": "Author",
-    "table_column_four": "Publisher",
-    "book_titles": [
+    "bookStoreHeader": "Book Store",
+    "tableColumnOne": "Image",
+    "tableColumnTwo": "Title",
+    "tableColumnThree": "Author",
+    "tableColumnFour": "Publisher",
+    "bookTitles": [
                     "Git Pocket Guide",
                     "Learning JavaScript Design Patterns",
                     "Designing Evolvable Web APIs with ASP.NET",
@@ -15,8 +15,8 @@
                     "Programming JavaScript Applications",
                     "Eloquent JavaScript, Second Edition",
                     "Understanding ECMAScript 6"],
-    "keyword_match_title": "Java",
-    "keyword_no_match": "ZZZZZ",
-    "no_rows_text": "No rows found",
+    "keywordMatchTitle": "Java",
+    "keywordNoMatch": "ZZZZZ",
+    "noRowsText": "No rows found",
     "baseURLDemoQA": "https://demoqa.com/"
 }

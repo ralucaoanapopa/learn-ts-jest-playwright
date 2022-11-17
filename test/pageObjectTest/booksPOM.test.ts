@@ -39,35 +39,35 @@ describe('Test books page as anonymous and authenticated user', () => {
 
     test('Anonymous user can see book store list and login button', async () => {
         expect(page.url()).toBe(books.booksURL);
-        expect(await books.book_header.innerText()).toBe(data.book_store_header);
+        expect(await books.bookHeader.innerText()).toBe(data.bookStoreHeader);
 
         expect(await books.elementLoginBtn.isVisible()).toBe(true);
 
-        expect(await books.table_head.isVisible()).toBe(true);
+        expect(await books.tableHead.isVisible()).toBe(true);
 
-        let table_columns = await books.table_header_columns;
+        let table_columns = await books.tableHeaderColumns;
         expect(table_columns.length).toBe(4);
 
-        expect(await table_columns[0].innerText()).toBe(data.table_column_one);
-        expect(await table_columns[1].innerText()).toBe(data.table_column_two);
-        expect(await table_columns[2].innerText()).toBe(data.table_column_three);
-        expect(await table_columns[3].innerText()).toBe(data.table_column_four);
+        expect(await table_columns[0].innerText()).toBe(data.tableColumnOne);
+        expect(await table_columns[1].innerText()).toBe(data.tableColumnTwo);
+        expect(await table_columns[2].innerText()).toBe(data.tableColumnThree);
+        expect(await table_columns[3].innerText()).toBe(data.tableColumnFour);
 
-        expect(await books.table_body.isVisible()).toBe(true);
+        expect(await books.tableBody.isVisible()).toBe(true);
 
-        let table_rows = await books.table_body_rows;
+        let table_rows = await books.tableBodyRows;
         expect(table_rows.length).toBe(10);
     });
 
     test('Anonymous user can see all book title from book store table', async () => {
         expect(page.url()).toBe(books.booksURL);
 
-        let all_book_titles = await books.all_book_titles;
+        let all_book_titles = await books.allBookTitles;
         expect(all_book_titles.length).toBe(8);
 
         let index = 0;
         for await (const title of all_book_titles) {
-            expect(await title.innerText()).toBe(data.book_titles[index]);
+            expect(await title.innerText()).toBe(data.bookTitles[index]);
             index++;
         }
     });
@@ -94,24 +94,24 @@ describe('Test books page as anonymous and authenticated user', () => {
         expect(await books.elementUserNameTxt.innerText()).toBe(username);
         expect(await books.elementLogoutBtn.isVisible()).toBe(true);
 
-        expect(await books.table_head.isVisible()).toBe(true);
+        expect(await books.tableHead.isVisible()).toBe(true);
 
-        let table_columns = await books.table_header_columns;
+        let table_columns = await books.tableHeaderColumns;
         expect(table_columns.length).toBe(4);
 
-        expect(await table_columns[0].innerText()).toBe(data.table_column_one);
-        expect(await table_columns[1].innerText()).toBe(data.table_column_two);
-        expect(await table_columns[2].innerText()).toBe(data.table_column_three);
-        expect(await table_columns[3].innerText()).toBe(data.table_column_four);
+        expect(await table_columns[0].innerText()).toBe(data.tableColumnOne);
+        expect(await table_columns[1].innerText()).toBe(data.tableColumnTwo);
+        expect(await table_columns[2].innerText()).toBe(data.tableColumnThree);
+        expect(await table_columns[3].innerText()).toBe(data.tableColumnFour);
 
-        expect(await books.table_body.isVisible()).toBe(true);
+        expect(await books.tableBody.isVisible()).toBe(true);
 
-        let all_book_titles = await books.all_book_titles;
+        let all_book_titles = await books.allBookTitles;
         expect(all_book_titles.length).toBe(8);
 
         let index = 0;
         for await (const title of all_book_titles) {
-            expect(await title.innerText()).toBe(data.book_titles[index]);
+            expect(await title.innerText()).toBe(data.bookTitles[index]);
             index++;
         }
         
@@ -123,15 +123,15 @@ describe('Test books page as anonymous and authenticated user', () => {
         expect(page.url()).toBe(books.booksURL);
 
         expect(await books.searchInputField.isVisible()).toBe(true);
-        await books.fillKeywordSearch(data.keyword_match_title);
+        await books.fillKeywordSearch(data.keywordMatchTitle);
 
-        let all_book_titles = await books.all_book_titles;
+        let all_book_titles = await books.allBookTitles;
         expect(all_book_titles.length).toBe(4);
 
-        expect(await all_book_titles[0].innerText()).toBe(data.book_titles[1]);
-        expect(await all_book_titles[1].innerText()).toBe(data.book_titles[3]);
-        expect(await all_book_titles[2].innerText()).toBe(data.book_titles[5]);
-        expect(await all_book_titles[3].innerText()).toBe(data.book_titles[6]);
+        expect(await all_book_titles[0].innerText()).toBe(data.bookTitles[1]);
+        expect(await all_book_titles[1].innerText()).toBe(data.bookTitles[3]);
+        expect(await all_book_titles[2].innerText()).toBe(data.bookTitles[5]);
+        expect(await all_book_titles[3].innerText()).toBe(data.bookTitles[6]);
         
     });
 
@@ -139,8 +139,8 @@ describe('Test books page as anonymous and authenticated user', () => {
         expect(page.url()).toBe(books.booksURL);
 
         expect(await books.searchInputField.isVisible()).toBe(true);
-        await books.fillKeywordSearch(data.keyword_no_match);
+        await books.fillKeywordSearch(data.keywordNoMatch);
 
-        expect(await books.noRowsTxt.innerText()).toBe(data.no_rows_text);
+        expect(await books.noRowsTxt.innerText()).toBe(data.noRowsText);
     });
 });
