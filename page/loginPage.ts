@@ -2,8 +2,11 @@ import { Page } from "playwright";
 import BasePage from "./basePage";
 
 export default class LoginPage extends BasePage {
-    public loginPage = 'login';
-    public profilePage = 'profile';
+
+    readonly emailInputId = "input[id='userName']";
+    readonly passwordInputId = "input[id='password']";
+    readonly loginBtn = "button[id='login']";
+    readonly errorMsgId = "//p[@id='name']";
 
     constructor(page: Page) {
         super(page);
@@ -13,23 +16,15 @@ export default class LoginPage extends BasePage {
         await super.navigate(this.loginPage);
     }
 
-    public get loginURL() {
-        return LoginPage.baseURL + this.loginPage;
-    }
-
-    public get profileURL() {
-        return LoginPage.baseURL + this.profilePage;
-    }
-
     public get elementEmailTextField() {
-        return this.page.locator("input[id='userName']");
+        return this.page.locator(this.emailInputId);
     }
 
     // short way of writing same thing:
-    elementPasswordTextField = async () => this.page.locator("input[id='password']");
+    elementPasswordTextField = async () => this.page.locator(this.passwordInputId);
 
     public get elementLoginBtn() {
-        return this.page.locator("button[id='login']");
+        return this.page.locator(this.loginBtn);
     }
 
     public async enterUserName(username: string){
@@ -57,7 +52,7 @@ export default class LoginPage extends BasePage {
     }
 
     public get errorLoginMsg() {
-        return this.page.locator("//p[@id='name']");
+        return this.page.locator(this.errorMsgId);
     }
     
 }

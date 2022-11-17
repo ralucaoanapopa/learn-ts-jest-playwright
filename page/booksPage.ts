@@ -2,8 +2,18 @@ import { Page } from "playwright";
 import BasePage from "./basePage";
 
 export default class BooksPage extends BasePage {
-    public loginPage = 'login';
-    public booksPage = 'books';
+
+    readonly loginBtn = "button[id='login']";
+    readonly logoutBtn = "button[id='submit']";
+    readonly usernameValueId = "#userName-value";
+    readonly bookHeaderXpath = "xpath=//div[@class='main-header']";
+    readonly tableHeadClass = ".rt-thead.-header";
+    readonly tableHeaderClass = ".rt-resizable-header-content";
+    readonly tableBodyClass = ".rt-tbody";
+    readonly tableBodyRowsClass = ".rt-tr-group";
+    readonly bookTitlesXpath = "xpath=//span[@class='mr-2']";
+    readonly searchInputId = "#searchBox";
+    readonly noRowsClass = ".rt-noData";
     
     constructor(page: Page) {
         super(page);
@@ -13,57 +23,48 @@ export default class BooksPage extends BasePage {
         await super.navigate(this.booksPage);
     }
 
-    public get loginURL() {
-        return BooksPage.baseURL + this.loginPage;
-    }
-
-    public get booksURL() {
-        return BooksPage.baseURL + this.booksPage;
-    }
-
     public get elementLoginBtn() {
-        return this.page.locator("button[id='login']");
+        return this.page.locator(this.loginBtn);
     }
 
     public get elementLogoutBtn() {
-        return this.page.locator("button[id='submit']");
+        return this.page.locator(this.logoutBtn);
     }
 
     public get elementUserNameTxt() {
-        const usernameValue_id = '#userName-value';
-        return this.page.locator(usernameValue_id);
+        return this.page.locator(this.usernameValueId);
     }
 
     public get bookHeader() {
-        return this.page.locator("xpath=//div[@class='main-header']");
+        return this.page.locator(this.bookHeaderXpath);
     }
 
     public get tableHead() {
-        return this.page.locator(".rt-thead.-header");
+        return this.page.locator(this.tableHeadClass);
     }
 
     public get tableHeaderColumns() {
-        return this.page.$$(".rt-resizable-header-content");
+        return this.page.$$(this.tableHeaderClass);
     }
 
     public get tableBody() {
-        return this.page.locator(".rt-tbody");
+        return this.page.locator(this.tableBodyClass);
     }
 
     public get tableBodyRows() {
-        return this.page.$$(".rt-tr-group");
+        return this.page.$$(this.tableBodyRowsClass);
     }
 
     public get allBookTitles() {
-        return this.page.$$("xpath=//span[@class='mr-2']");
+        return this.page.$$(this.bookTitlesXpath);
     }
 
     public get searchInputField() {
-        return this.page.locator("#searchBox");
+        return this.page.locator(this.searchInputId);
     }
 
     public get noRowsTxt() {
-        return this.page.locator(".rt-noData");
+        return this.page.locator(this.noRowsClass);
     }
 
     public async clickLoginBtn() {
