@@ -122,4 +122,20 @@ describe('Test books page as anonymous and authenticated user', () => {
         await books.clickLogoutBtn();
         expect(page.url()).toBe(loginURL);
     });
+
+    test('Anonymous user can search books by title', async () => {
+        expect(page.url()).toBe(booksURL);
+
+        expect(await books.searchInputField.isVisible()).toBe(true);
+        await books.fillKeywordSearch('Java');
+
+        let all_book_titles = await books.all_book_titles;
+        expect(all_book_titles.length).toBe(4);
+
+        expect(await all_book_titles[0].innerText()).toBe(data.book_titles[1]);
+        expect(await all_book_titles[1].innerText()).toBe(data.book_titles[3]);
+        expect(await all_book_titles[2].innerText()).toBe(data.book_titles[5]);
+        expect(await all_book_titles[3].innerText()).toBe(data.book_titles[6]);
+        
+    });
 });

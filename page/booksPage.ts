@@ -44,6 +44,10 @@ export default class BooksPage {
         return this.page.$$("xpath=//span[@class='mr-2']");
     }
 
+    public get searchInputField() {
+        return this.page.locator("#searchBox");
+    }
+
     public async clickLoginBtn() {
         const elem = this.elementLoginBtn;
         await elem?.click();
@@ -52,6 +56,10 @@ export default class BooksPage {
     public async clickLogoutBtn() {
         const elem = this.elementLogoutBtn;
         await elem?.click();
+    }
+
+    public async fillKeywordSearch(keyword: string) {
+        await this.searchInputField.fill(keyword);
     }
 
 }
