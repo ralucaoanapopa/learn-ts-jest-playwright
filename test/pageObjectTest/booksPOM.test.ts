@@ -127,7 +127,7 @@ describe('Test books page as anonymous and authenticated user', () => {
         expect(page.url()).toBe(booksURL);
 
         expect(await books.searchInputField.isVisible()).toBe(true);
-        await books.fillKeywordSearch('Java');
+        await books.fillKeywordSearch(data.keyword_match_title);
 
         let all_book_titles = await books.all_book_titles;
         expect(all_book_titles.length).toBe(4);
@@ -137,5 +137,14 @@ describe('Test books page as anonymous and authenticated user', () => {
         expect(await all_book_titles[2].innerText()).toBe(data.book_titles[5]);
         expect(await all_book_titles[3].innerText()).toBe(data.book_titles[6]);
         
+    });
+
+    test('No rows are displayed when keyword does not match title, author or publisher', async () => {
+        expect(page.url()).toBe(booksURL);
+
+        expect(await books.searchInputField.isVisible()).toBe(true);
+        await books.fillKeywordSearch(data.keyword_no_match);
+
+        expect(await books.noRowsTxt.innerText()).toBe(data.no_rows_text);
     });
 });
