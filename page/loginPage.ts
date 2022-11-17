@@ -1,10 +1,24 @@
 import { Page } from "playwright";
+import BasePage from "./basePage";
 
-export default class LoginPage {
+export default class LoginPage extends BasePage {
+    public loginPage = 'login';
+    public profilePage = 'profile';
 
-    private page: Page;
     constructor(page: Page) {
-        this.page = page;
+        super(page);
+    }
+
+    async navigate(){
+        await super.navigate(this.loginPage);
+    }
+
+    public get loginURL() {
+        return LoginPage.baseURL + this.loginPage;
+    }
+
+    public get profileURL() {
+        return LoginPage.baseURL + this.profilePage;
     }
 
     public get elementEmailTextField() {
@@ -36,7 +50,7 @@ export default class LoginPage {
         await elem?.click();
     }
 
-    public async login_form(username: string, password: string) {
+    public async loginForm(username: string, password: string) {
         await this.enterUserName(username);
         await this.enterPassword(password);
         await this.clickLoginBtn();

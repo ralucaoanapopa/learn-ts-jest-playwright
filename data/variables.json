@@ -17,5 +17,6 @@
                     "Understanding ECMAScript 6"],
     "keyword_match_title": "Java",
     "keyword_no_match": "ZZZZZ",
-    "no_rows_text": "No rows found"
+    "no_rows_text": "No rows found",
+    "baseURLDemoQA": "https://demoqa.com/"
 }

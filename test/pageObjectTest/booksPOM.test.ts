@@ -5,10 +5,6 @@ import * as data from '../../data/variables.json';
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-const baseURL = 'https://demoqa.com/';
-const loginURL = baseURL + 'login';
-const booksURL = baseURL + 'books';
-
 // get credentials set as env variables
 const username: string = (process.env.USERNAME_TS as string);
 const password: string = (process.env.PASSWORD_TS as string);
@@ -38,11 +34,11 @@ describe('Test books page as anonymous and authenticated user', () => {
     });
 
     beforeEach( async () => {
-        await page.goto(booksURL);
+        await books.navigate();
     });
 
     test('Anonymous user can see book store list and login button', async () => {
-        expect(page.url()).toBe(booksURL);
+        expect(page.url()).toBe(books.booksURL);
         expect(await books.book_header.innerText()).toBe(data.book_store_header);
 
         expect(await books.elementLoginBtn.isVisible()).toBe(true);
@@ -64,7 +60,7 @@ describe('Test books page as anonymous and authenticated user', () => {
     });
 
     test('Anonymous user can see all book title from book store table', async () => {
-        expect(page.url()).toBe(booksURL);
+        expect(page.url()).toBe(books.booksURL);
 
         let all_book_titles = await books.all_book_titles;
         expect(all_book_titles.length).toBe(8);
@@ -77,24 +73,24 @@ describe('Test books page as anonymous and authenticated user', () => {
     });
 
     test('Anonymous user can navigate to login page from books page', async () => {
-        expect(page.url()).toBe(booksURL);
+        expect(page.url()).toBe(books.booksURL);
 
         expect(await books.elementLoginBtn.isVisible()).toBe(true);
 
         await books.clickLoginBtn();
-        expect(page.url()).toBe(loginURL);
+        expect(page.url()).toBe(books.loginURL);
     });
 
     test('Authenticated user can see book store list, username & logout button', async () => {
-        expect(page.url()).toBe(booksURL);
+        expect(page.url()).toBe(books.booksURL);
 
         expect(await books.elementLoginBtn.isVisible()).toBe(true);
 
         await books.clickLoginBtn();
-        expect(page.url()).toBe(loginURL);
-        await login.login_form(username, password);
+        expect(page.url()).toBe(books.loginURL);
+        await login.loginForm(username, password);
 
-        await page.waitForURL(booksURL);
+        await page.waitForURL(books.booksURL);
         expect(await books.elementUserNameTxt.innerText()).toBe(username);
         expect(await books.elementLogoutBtn.isVisible()).toBe(true);
 
@@ -120,11 +116,11 @@ describe('Test books page as anonymous and authenticated user', () => {
         }
         
         await books.clickLogoutBtn();
-        expect(page.url()).toBe(loginURL);
+        expect(page.url()).toBe(books.loginURL);
     });
 
     test('Anonymous user can search books by title', async () => {
-        expect(page.url()).toBe(booksURL);
+        expect(page.url()).toBe(books.booksURL);
 
         expect(await books.searchInputField.isVisible()).toBe(true);
         await books.fillKeywordSearch(data.keyword_match_title);
@@ -140,7 +136,7 @@ describe('Test books page as anonymous and authenticated user', () => {
     });
 
     test('No rows are displayed when keyword does not match title, author or publisher', async () => {
-        expect(page.url()).toBe(booksURL);
+        expect(page.url()).toBe(books.booksURL);
 
         expect(await books.searchInputField.isVisible()).toBe(true);
         await books.fillKeywordSearch(data.keyword_no_match);

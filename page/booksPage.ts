@@ -1,10 +1,24 @@
 import { Page } from "playwright";
+import BasePage from "./basePage";
 
-export default class BooksPage {
-
-    private page: Page;
+export default class BooksPage extends BasePage {
+    public loginPage = 'login';
+    public booksPage = 'books';
+    
     constructor(page: Page) {
-        this.page = page;
+        super(page);
+    }
+
+    async navigate(){
+        await super.navigate(this.booksPage);
+    }
+
+    public get loginURL() {
+        return BooksPage.baseURL + this.loginPage;
+    }
+
+    public get booksURL() {
+        return BooksPage.baseURL + this.booksPage;
     }
 
     public get elementLoginBtn() {
