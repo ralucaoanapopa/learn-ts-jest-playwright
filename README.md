@@ -109,6 +109,7 @@ See documentation about [codegen](https://playwright.dev/docs/codegen-intro)
 
 ## Free websites for UI testing
 - [DemoQA](https://demoqa.com/)
+- [Sauce Demo](https://www.saucedemo.com/)
 - [Letcode](https://letcode.in/)
 - [UI elements on herokuapp](https://the-internet.herokuapp.com/)
 - [Test pages for automating](https://testpages.herokuapp.com/styled/index.html)

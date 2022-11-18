@@ -1,0 +1,6 @@
+{
+    "baseURL": "https://www.saucedemo.com/",
+    "siteTitle": "Swag Labs",
+    "invalidData": "invalid",
+    "errorMsgInvalidCredentials": "Epic sadface: Username and password do not match any user in this service"
+}
