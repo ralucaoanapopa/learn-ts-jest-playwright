@@ -55,7 +55,7 @@ describe('Window handling learning', () => {
         await page.goto(windows_letcode_URL);
 
         // dismiss consent to use data
-        await page.click('text="Do not consent"');
+        //await page.click('text="Do not consent"');
 
         const [newWindow] = await Promise.all([
             context.waitForEvent("page"),

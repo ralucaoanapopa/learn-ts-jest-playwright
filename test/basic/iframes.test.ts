@@ -40,7 +40,7 @@ describe('Interact with iframes', () => {
         expect(await page.title()).not.toBeNull();
 
         // dismiss consent to use data
-        await page.click(locator_not_consent);
+        //await page.click(locator_not_consent);
 
         const frame = page.frame({ name: first_frame_name });
         if(frame != null){
