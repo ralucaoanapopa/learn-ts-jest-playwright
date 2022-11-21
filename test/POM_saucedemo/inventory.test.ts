@@ -87,4 +87,16 @@ describe('Test inventory page', () => {
 
     });
 
+    test("Should be able to add products to shopping cart", async () => {
+        
+        await inventory.addProductToShoppingCart(inventory.onesieId);
+        await inventory.buttonRemoveProduct(inventory.onesieRemoveId);
+        expect(await inventory.shoppingCartBadge.innerText()).toBe("1");
+
+        await inventory.addProductToShoppingCart(inventory.boltTshirtId);
+        await inventory.buttonRemoveProduct(inventory.boltTshirtRemoveId);
+        expect(await inventory.shoppingCartBadge.innerText()).toBe("2");
+
+    });
+
 });

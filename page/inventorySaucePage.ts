@@ -13,6 +13,12 @@ export default class InventoryPage extends BasePage {
     readonly itemLabelsClass = ".inventory_item_label";
     readonly itemNamesClass = '.inventory_item_name';
     readonly activeFilterClass = ".active_option";
+    readonly onesieId = "#add-to-cart-sauce-labs-onesie";
+    readonly onesieRemoveId = "#remove-sauce-labs-onesie";
+    readonly boltTshirtId = "#add-to-cart-sauce-labs-bolt-t-shirt";
+    readonly boltTshirtRemoveId = "#remove-sauce-labs-bolt-t-shirt";
+    readonly shoppingCartBadgeClass = ".shopping_cart_badge";
+
 
     constructor(page: Page) {
         super(page);
@@ -60,6 +66,10 @@ export default class InventoryPage extends BasePage {
         return this.page.locator(this.activeFilterClass);
     }
 
+    public get shoppingCartBadge() {
+        return this.page.locator(this.shoppingCartBadgeClass);
+    }
+
     // async methods
     public async clickBurgerMenu() {
         await this.burgerMenu.click();
@@ -90,5 +100,14 @@ export default class InventoryPage extends BasePage {
 
     public async clickFilterPriceAsc() {
         await this.selectSortFilter.selectOption({ value: 'lohi'});
+    }
+
+    public async addProductToShoppingCart(productId: string) {
+        let productToAdd =  this.page.locator(productId);
+        await productToAdd.click();
+    }
+
+    public async buttonRemoveProduct(productId: string) {
+        return this.page.locator(productId);
     }
 }
