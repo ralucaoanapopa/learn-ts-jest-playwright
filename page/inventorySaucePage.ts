@@ -6,6 +6,9 @@ export default class InventoryPage extends BasePage {
 
     readonly burgerMenuId = "button[id='react-burger-menu-btn']";
     readonly logoutId = "#logout_sidebar_link";
+    readonly inventoryListClass = ".inventory_list";
+    readonly selectSortClass = ".product_sort_container";
+    readonly shoppingCartClass = ".shopping_cart_link";
 
     constructor(page: Page) {
         super(page);
@@ -37,5 +40,17 @@ export default class InventoryPage extends BasePage {
         expect(await this.burgerMenu.isVisible()).toBe(true);
         await this.clickBurgerMenu();
         await this.clickLogoutLink();
+    }
+
+    public get productsList() {
+        return this.page.locator(this.inventoryListClass);
+    }
+
+    public get selectSortFilter() {
+        return this.page.locator(this.selectSortClass);
+    }
+
+    public get shoppingCart() {
+        return this.page.locator(this.shoppingCartClass);
     }
 }
