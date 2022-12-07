@@ -13,6 +13,11 @@ export default class CheckoutPage extends BasePage {
     readonly itemPriceClass = ".inventory_item_price";
     readonly onesieRemoveId = "#remove-sauce-labs-onesie";
 
+    readonly firstNameId = "#first-name";
+    readonly lastNameId = "#last-name";
+    readonly postalCodeId = "#postal-code";
+    readonly continueCheckoutButtonId = "#continue";
+
     constructor(page: Page) {
         super(page);
     }
@@ -54,6 +59,22 @@ export default class CheckoutPage extends BasePage {
         return this.page.$$(this.itemPriceClass);
     }
 
+    public get firstName() {
+        return this.page.locator(this.firstNameId);
+    }
+
+    public get lastName() {
+        return this.page.locator(this.lastNameId);
+    }
+
+    public get postalCode() {
+        return this.page.locator(this.postalCodeId);
+    }
+
+    public get continue() {
+        return this.page.locator(this.continueCheckoutButtonId);
+    }
+
     // async methods
     public async clickContinueShopping() {
         await this.continueShopping.click();
@@ -64,4 +85,29 @@ export default class CheckoutPage extends BasePage {
         await productToARemove.click();
     }
 
+    public async clickCheckout() {
+        await this.checkout.click();
+    }
+
+    public async enterFirstName(name: string) {
+        await this.firstName?.fill(name);
+    }
+
+    public async enterLastName(name: string) {
+        await this.lastName?.fill(name);
+    }
+
+    public async enterPostalCode(code: string) {
+        await this.postalCode?.fill(code);
+    }
+
+    public async submitCheckoutInfo(first: string, last: string, code: string) {
+        await this.enterFirstName(first);
+        await this.enterLastName(last);
+        await this.enterPostalCode(code);
+    }
+
+    public async clickContinue() {
+        await this.continue.click()
+    }
 }

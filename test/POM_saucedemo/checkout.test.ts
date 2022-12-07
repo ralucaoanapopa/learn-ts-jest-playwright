@@ -111,4 +111,23 @@ describe('Test checkout flow', () => {
         await checkout.removeProduct(checkout.onesieRemoveId);
         expect((await checkout.cartItemList).length).toBe(3);
     });
+
+    test("Should be able to provide information on checkout", async () => {
+        await checkout.clickCheckout();
+
+        expect(page.url()).toBe(checkout.checkoutStepOneURL);
+        expect(await checkout.titleCheckout.innerText()).toBe(data.checkoutOneTitle);
+
+        await checkout.submitCheckoutInfo(data.firstName, data.lastName, data.postalCode);
+
+        expect(await checkout.continue.getAttribute("value")).toBe(data.continueCheckout);
+        
+    });
+
+    test("Should be able to see overview on checkout", async () => {
+        await checkout.clickContinue();
+
+        expect(page.url()).toBe(checkout.checkoutStepTwoURL);
+        expect(await checkout.titleCheckout.innerText()).toBe(data.checkoutTwoTitle);
+    });
 });

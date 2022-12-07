@@ -18,5 +18,11 @@
     "continueShopping": "CONTINUE SHOPPING",
     "productOnesiePrice": "$7.99",
     "productBoltTShirtPrice": "$15.99",
-    "productBackpackPrice": "$29.99"
+    "productBackpackPrice": "$29.99",
+    "checkoutOneTitle": "CHECKOUT: YOUR INFORMATION",
+    "firstName": "Gustave",
+    "lastName": "McKellen",
+    "postalCode": "845346",
+    "continueCheckout": "Continue",
+    "checkoutTwoTitle": "CHECKOUT: OVERVIEW"
 }
