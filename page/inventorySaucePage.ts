@@ -17,6 +17,8 @@ export default class InventoryPage extends BasePage {
     readonly onesieRemoveId = "#remove-sauce-labs-onesie";
     readonly boltTshirtId = "#add-to-cart-sauce-labs-bolt-t-shirt";
     readonly boltTshirtRemoveId = "#remove-sauce-labs-bolt-t-shirt";
+    readonly backpackId = "#add-to-cart-sauce-labs-backpack";
+    readonly backpackRemoveId = "#remove-sauce-labs-backpack";
     readonly shoppingCartBadgeClass = ".shopping_cart_badge";
 
 
@@ -109,5 +111,9 @@ export default class InventoryPage extends BasePage {
 
     public async buttonRemoveProduct(productId: string) {
         return this.page.locator(productId);
+    }
+
+    public async clickShoppingCart() {
+        await this.shoppingCart.click();
     }
 }
