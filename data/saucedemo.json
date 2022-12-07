@@ -10,5 +10,13 @@
     "productBackpack": "Sauce Labs Backpack",
     "productJacket": "Sauce Labs Fleece Jacket",
     "productOnesie": "Sauce Labs Onesie",
-    "productAllThings": "Test.allTheThings() T-Shirt (Red)"
+    "productBoltTShirt": "Sauce Labs Bolt T-Shirt",
+    "productAllThings": "Test.allTheThings() T-Shirt (Red)",
+    "cartTitle": "YOUR CART",
+    "cartQuantity": "QTY",
+    "cartDescription": "DESCRIPTION",
+    "continueShopping": "CONTINUE SHOPPING",
+    "productOnesiePrice": "$7.99",
+    "productBoltTShirtPrice": "$15.99",
+    "productBackpackPrice": "$29.99"
 }

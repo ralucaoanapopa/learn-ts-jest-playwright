@@ -19,8 +19,9 @@ export default class InventoryPage extends BasePage {
     readonly boltTshirtRemoveId = "#remove-sauce-labs-bolt-t-shirt";
     readonly backpackId = "#add-to-cart-sauce-labs-backpack";
     readonly backpackRemoveId = "#remove-sauce-labs-backpack";
+    readonly fleeceJacketId = "#add-to-cart-sauce-labs-fleece-jacket";
+    readonly fleeceJacketRemoveId = "#remove-sauce-labs-fleece-jacket";
     readonly shoppingCartBadgeClass = ".shopping_cart_badge";
-
 
     constructor(page: Page) {
         super(page);

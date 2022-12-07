@@ -5,6 +5,7 @@ export default class BasePage {
     public page: Page;
     readonly baseURL = data.baseURL;
     readonly inventoryPage = 'inventory.html';
+    readonly cartPage = 'cart.html';
 
     constructor(page: Page) {
         this.page = page;
@@ -16,5 +17,9 @@ export default class BasePage {
 
     public get inventoryURL() {
         return this.baseURL + this.inventoryPage;
+    }
+
+    public get cartURL() {
+        return this.baseURL + this.cartPage;
     }
 }
