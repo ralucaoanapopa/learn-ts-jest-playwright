@@ -18,6 +18,21 @@ export default class CheckoutPage extends BasePage {
     readonly postalCodeId = "#postal-code";
     readonly continueCheckoutButtonId = "#continue";
 
+    readonly cancelButtonId = "#cancel";
+    readonly summaryInfoClass = ".summary_info_label";
+    readonly summaryValueClass = ".summary_value_label";
+    readonly summarySubtotalClass= ".summary_subtotal_label";
+    readonly summaryTaxClass= ".summary_tax_label";
+    readonly summaryTotalClass= ".summary_total_label";
+
+    readonly finishCheckoutButtonId = "#finish";
+    readonly completeHeaderClass = ".complete-header";
+    readonly completeTextClass = ".complete-text";
+    readonly finalImageClass = ".pony_express";
+    readonly backButtonId = "#back-to-products";
+
+    readonly errorValidationClass = ".error-message-container.error";
+
     constructor(page: Page) {
         super(page);
     }
@@ -75,6 +90,18 @@ export default class CheckoutPage extends BasePage {
         return this.page.locator(this.continueCheckoutButtonId);
     }
 
+    public get cancel() {
+        return this.page.locator(this.cancelButtonId);
+    }
+
+    public get finish() {
+        return this.page.locator(this.finishCheckoutButtonId);
+    }
+
+    public get back() {
+        return this.page.locator(this.backButtonId);
+    }
+
     // async methods
     public async clickContinueShopping() {
         await this.continueShopping.click();
@@ -109,5 +136,21 @@ export default class CheckoutPage extends BasePage {
 
     public async clickContinue() {
         await this.continue.click()
+    }
+
+    public async clickFinish() {
+        await this.finish.click()
+    }
+
+    public async clickBack() {
+        await this.back.click()
+    }
+
+    public async elementsByClass(element: string) {
+        return this.page.$$(element);
+    }
+
+    public async elementByClass(element: string) {
+        return this.page.locator(element);
     }
 }

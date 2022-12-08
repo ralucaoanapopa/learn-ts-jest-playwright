@@ -129,5 +129,91 @@ describe('Test checkout flow', () => {
 
         expect(page.url()).toBe(checkout.checkoutStepTwoURL);
         expect(await checkout.titleCheckout.innerText()).toBe(data.checkoutTwoTitle);
+        expect(await checkout.cartQuantity.innerText()).toBe(data.cartQuantity);
+        expect(await checkout.cartDescription.innerText()).toBe(data.cartDescription);
+
+        expect(await checkout.cancel.innerText()).toBe(data.cancelCheckout);
+        expect(await checkout.finish.innerText()).toBe(data.finishCheckout);
+
+        expect((await checkout.cartItemList).length).toBe(3);
+
+        let allItemsPrices = await checkout.itemPriceList;
+        expect(await allItemsPrices[0].innerText()).toBe(data.productBoltTShirtPrice);
+        expect(await allItemsPrices[1].innerText()).toBe(data.productBackpackPrice);
+        expect(await allItemsPrices[2].innerText()).toBe(data.productFleeceJacket);
+    });
+
+    test("Should be able to see total price and shipping information on checkout", async () => {
+        expect(page.url()).toBe(checkout.checkoutStepTwoURL);
+
+        let allSummaryInfo = await checkout.elementsByClass(checkout.summaryInfoClass);
+        expect(await (allSummaryInfo[0]).innerText()).toBe(data.paymentInformationLabel);
+        expect(await (allSummaryInfo[1]).innerText()).toBe(data.shippingInformationLabel);
+
+        let allSummaryValue = await checkout.elementsByClass(checkout.summaryValueClass);
+        expect(await (allSummaryValue[0]).innerText()).toBe(data.paymentInformationValue);
+        expect(await (allSummaryValue[1]).innerText()).toBe(data.shippingInformationValue);
+
+        expect(await (await checkout.elementByClass(checkout.summarySubtotalClass)).innerText()).toBe(data.totalItemPrice);
+        expect(await (await checkout.elementByClass(checkout.summaryTaxClass)).innerText()).toBe(data.taxPrice);
+        expect(await (await checkout.elementByClass(checkout.summaryTotalClass)).innerText()).toBe(data.totalPrice);
+
+    });
+
+    test("Should be able to finish order from checkout", async () => {
+        await checkout.clickFinish();
+
+        expect(page.url()).toBe(checkout.checkoutFinalURL);
+        expect(await checkout.titleCheckout.innerText()).toBe(data.checkoutFinalTitle);
+
+        expect(await (await checkout.elementByClass(checkout.completeHeaderClass)).innerText()).toBe(data.completeHeader);
+        expect(await (await checkout.elementByClass(checkout.completeTextClass)).innerText()).toBe(data.completeText);
+
+        expect(await (await checkout.elementByClass(checkout.finalImageClass)).getAttribute("src")).toBe(data.finalImg);
+    });
+
+    test("Should be able to navigate back to inventory after order was sent", async () => {
+       await checkout.clickBack();
+       
+       expect(page.url()).toBe(checkout.inventoryURL);
+    });
+
+    test("Should not be able to sent order without any products", async () => {
+        await inventory.clickShoppingCart();
+        expect(page.url()).toBe(checkout.cartURL);
+
+        await checkout.clickCheckout();
+        expect(page.url()).toBe(checkout.checkoutStepOneURL);
+
+        await checkout.submitCheckoutInfo(data.firstName, data.lastName, data.postalCode);
+
+        await checkout.clickContinue();
+        expect(page.url()).toBe(checkout.checkoutStepTwoURL);
+
+        await checkout.clickFinish();
+        expect(page.url()).toBe(checkout.checkoutFinalURL);
+
+        fail('Should not be able to sent order without any products');
+    });
+
+    test("Should not be able to see overview without providing shipping information", async () => {
+        await page.goto(checkout.checkoutStepOneURL);
+        expect(page.url()).toBe(checkout.checkoutStepOneURL);
+
+        await checkout.clickContinue();
+        let elementError = await checkout.elementByClass(checkout.errorValidationClass);
+        expect(await elementError.innerText()).toBe(data.errorCheckoutFirstName);
+
+        await checkout.enterFirstName(data.firstName);
+        await checkout.clickContinue();
+        expect(await elementError.innerText()).toBe(data.errorCheckoutLastName);
+
+        await checkout.enterLastName(data.lastName);
+        await checkout.clickContinue();
+        expect(await elementError.innerText()).toBe(data.errorCheckoutPostalCode);
+
+        await checkout.enterPostalCode(data.postalCode);
+        await checkout.clickContinue();
+        expect(page.url()).toBe(checkout.checkoutStepTwoURL);
     });
 });

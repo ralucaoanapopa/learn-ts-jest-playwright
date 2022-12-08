@@ -8,6 +8,7 @@ export default class BasePage {
     readonly cartPage = 'cart.html';
     readonly checkoutOne = 'checkout-step-one.html';
     readonly checkoutTwo = 'checkout-step-two.html';
+    readonly checkoutFinal = 'checkout-complete.html';
 
     constructor(page: Page) {
         this.page = page;
@@ -31,5 +32,9 @@ export default class BasePage {
 
     public get checkoutStepTwoURL() {
         return this.baseURL + this.checkoutTwo;
+    }
+
+    public get checkoutFinalURL() {
+        return this.baseURL + this.checkoutFinal;
     }
 }
