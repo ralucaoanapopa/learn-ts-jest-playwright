@@ -2,10 +2,15 @@
 
 1. Download [nodejs](https://nodejs.org/en/download/) + [how to install nodejs](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
 - If it is already installed, check in terminal:
+
+```
 > node -v
+```
 
 2. Create package.json execute in terminal:
+```
 > npm init -y
+```
 
 3. Edit package.json, add devDependencies (these won't be installed globally, but only for this project)
 
@@ -21,7 +26,9 @@
 ```
 
 4. Install dev dependencies by:
+```
 > npm i
+```
 
 5. Configure `typescript`
 
@@ -65,29 +72,40 @@ Typescript file will be compiled in javascript so need to:
 
 Decided to use [this package](https://www.npmjs.com/package/dotenv) because it has 0 dependencies.
 
-> npm install dotenv --save
+```
+npm install dotenv --save
+```
 
 [Use dotenv with import](https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import)
 
 8. Install `jest-cli`
 
-> npm i -g jest-cli
+```
+npm i -g jest-cli
+```
 
 # Run tests
 
 ## Run all tests
-> npm test
+```
+npm test
+```
 
 OR
+```
+jest test
+```
 
-> jest test
+jest runs by default all tests in parallel, so in order to run them sequentially:
 
-^ jest runs all tests in parallel, so in order to run them sequentially:
-
-> jest -i
+```
+jest -i
+```
 
 ## Run one test suite
-> jest <test_suite>.test.ts
+```
+jest <test_suite>.test.ts
+```
 
 # Results
 
@@ -102,7 +120,9 @@ OR
 
 See documentation about [codegen](https://playwright.dev/docs/codegen-intro)
 
-> npx playwright codegen <url_to_test>
+```
+npx playwright codegen <url_to_test>
+```
 
 # Resources
 
