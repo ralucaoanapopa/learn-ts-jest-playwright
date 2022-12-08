@@ -4,12 +4,12 @@
 - If it is already installed, check in terminal:
 
 ```
-> node -v
+node -v
 ```
 
 2. Create package.json execute in terminal:
 ```
-> npm init -y
+npm init -y
 ```
 
 3. Edit package.json, add devDependencies (these won't be installed globally, but only for this project)
@@ -27,7 +27,7 @@
 
 4. Install dev dependencies by:
 ```
-> npm i
+npm i
 ```
 
 5. Configure `typescript`
