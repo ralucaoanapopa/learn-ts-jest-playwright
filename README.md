@@ -91,7 +91,12 @@ OR
 
 # Results
 
+## All tests
+
 ![All tests](/results/all_tests_jest_playwright.PNG "All tests")
+
+## Test suite: checkout.test.ts
+![Test Suite Checkout](/results/test_suite_checkout_results.PNG "Test Suite Checkout")
 
 # Generate code with codegen
 
