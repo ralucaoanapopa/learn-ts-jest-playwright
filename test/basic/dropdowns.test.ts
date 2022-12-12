@@ -1,16 +1,16 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 
-const herokuapp_dropdown_URL = 'https://the-internet.herokuapp.com/dropdown';
-const dropdown_id = '#dropdown';
-const option_1_label = "Option 1";
-const option_2_value = "2";
+const herokuAppDropdownURL = 'https://the-internet.herokuapp.com/dropdown';
+const dropdownId = '#dropdown';
+const option_1_Label = "Option 1";
+const option_2_Value = "2";
 
-const testpages_basic_form_URL = 'https://testpages.herokuapp.com/styled/basic-html-form-test.html';
-const multiple_select_xpath = "xpath=//select[@name='multipleselect[]']";
-const option_1_value = 'ms1';
+const testPagesBasicFormURL = 'https://testpages.herokuapp.com/styled/basic-html-form-test.html';
+const multipleSelectXpath = "xpath=//select[@name='multipleselect[]']";
+const option_1_Value = 'ms1';
 
-const dropdown_xpath = "xpath=//select[@name='dropdown']";
-const option_5_value = 'dd5';
+const dropdownXpath = "xpath=//select[@name='dropdown']";
+const option_5_Value = 'dd5';
 
 describe('Interact with dropdowns', () => {
 
@@ -32,46 +32,46 @@ describe('Interact with dropdowns', () => {
 
     test('Handle dropdown options from herokuapp', async () => {
 
-        await page.goto(herokuapp_dropdown_URL);
+        await page.goto(herokuAppDropdownURL);
 
-        const dropdown_elem = await page.locator(dropdown_id);
+        const dropdownElem = await page.locator(dropdownId);
         // select option based on value
-        await dropdown_elem.selectOption({value: option_2_value});
+        await dropdownElem.selectOption({value: option_2_Value});
         // label
-        await dropdown_elem.selectOption({label: option_1_label});
+        await dropdownElem.selectOption({label: option_1_Label});
         // index
-        await dropdown_elem.selectOption({index: 2});
+        await dropdownElem.selectOption({index: 2});
 
     });
 
     test('Handle select multiple values from test pages', async () => {
-        await page.goto(testpages_basic_form_URL);
+        await page.goto(testPagesBasicFormURL);
         
-        let multiple_select_elem = await page.locator(multiple_select_xpath);
+        let multipleSelectElem = await page.locator(multipleSelectXpath);
 
-        await multiple_select_elem.selectOption([
-            {value: option_1_value}, {index: 3}
+        await multipleSelectElem.selectOption([
+            {value: option_1_Value}, {index: 3}
         ]);
 
     });
 
     test('Count all options from a dropdown',async () => {
-        await page.goto(testpages_basic_form_URL);
+        await page.goto(testPagesBasicFormURL);
 
-        const dropdown = await page.$(dropdown_xpath);
-        const available_options = await dropdown?.$$('option');
+        const dropdown = await page.$(dropdownXpath);
+        const availableOptions = await dropdown?.$$('option');
 
-        expect(available_options?.length).toBe(6);
+        expect(availableOptions?.length).toBe(6);
 
     });
 
     test('Get value of the selected option via index', async () => {
-        await page.goto(testpages_basic_form_URL);
+        await page.goto(testPagesBasicFormURL);
 
-        await page.selectOption(dropdown_xpath, {index: 4});
+        await page.selectOption(dropdownXpath, {index: 4});
 
-        const text_option = await page.$eval<string, HTMLSelectElement>(dropdown_xpath, elem => elem.value);
-        expect(text_option).toBe(option_5_value);
+        const textOption = await page.$eval<string, HTMLSelectElement>(dropdownXpath, elem => elem.value);
+        expect(textOption).toBe(option_5_Value);
 
     });
 

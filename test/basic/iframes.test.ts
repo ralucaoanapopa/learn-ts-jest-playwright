@@ -1,20 +1,20 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 
-const base_letcode_URL = 'https://letcode.in/';
-const frames_letcode_URL = base_letcode_URL + 'frame';
+const baseLetcodeURL = 'https://letcode.in/';
+const framesLetcodeURL = baseLetcodeURL + 'frame';
 
-const locator_not_consent = 'text="Do not consent"';
-const first_frame_name = 'firstFr';
-const firstName_name = "input[name='fname']";
-const lastName_name = "input[name='lname']";
-const firstName_data = 'Hakuna';
-const lastName_data = 'Matata';
-const lastName_data_parent = 'Gandalf';
-const output_xpath = "xpath=//p[@class='title has-text-info']";
-const email_name = "input[name='email']";
-const email_data = 'hakuna.matata@test.com';
+const locatorNotConsent = 'text="Do not consent"';
+const firstFrameName = 'firstFr';
+const firstNameInput = "input[name='fname']";
+const lastNameInput = "input[name='lname']";
+const firstNameData = 'Hakuna';
+const lastNameData = 'Matata';
+const lastNameDataParent = 'Gandalf';
+const outputXpath = "xpath=//p[@class='title has-text-info']";
+const emailName = "input[name='email']";
+const emailData = 'hakuna.matata@test.com';
 
-const frames_demoqa_URL = 'https://demoqa.com/frames';
+const framesDemoqaURL = 'https://demoqa.com/frames';
 
 describe('Interact with iframes', () => {
 
@@ -35,35 +35,35 @@ describe('Interact with iframes', () => {
     });
 
     test('Interact with nested frames on Letcode', async () => {
-        await page.goto(frames_letcode_URL);
+        await page.goto(framesLetcodeURL);
         expect(page).not.toBeNull();
         expect(await page.title()).not.toBeNull();
 
         // dismiss consent to use data
-        //await page.click(locator_not_consent);
+        //await page.click(locatorNotConsent);
 
-        const frame = page.frame({ name: first_frame_name });
+        const frame = page.frame({ name: firstFrameName });
         if(frame != null){
-            await frame.fill(firstName_name, firstName_data);
-            await frame?.fill(lastName_name, lastName_data);
+            await frame.fill(firstNameInput, firstNameData);
+            await frame?.fill(lastNameInput, lastNameData);
 
-            expect(await frame.innerText(output_xpath)).toContain(firstName_data + ' ' + lastName_data);
+            expect(await frame.innerText(outputXpath)).toContain(firstNameData + ' ' + lastNameData);
 
             const frames =  frame.childFrames();
             expect(frames.length).toBe(2);
 
-            await frames[1]?.fill(email_name, email_data);
+            await frames[1]?.fill(emailName, emailData);
 
             const parentFrame = frames[1].parentFrame();
-            await parentFrame?.fill(lastName_name, lastName_data_parent);
-            expect(await frame.innerText(output_xpath)).toContain(firstName_data + ' ' + lastName_data_parent);
+            await parentFrame?.fill(lastNameInput, lastNameDataParent);
+            expect(await frame.innerText(outputXpath)).toContain(firstNameData + ' ' + lastNameDataParent);
 
         } else 
             throw new Error("No such frame");
     });
 
     test('Interact with frames on demoqa', async () => {
-        await page.goto(frames_demoqa_URL);
+        await page.goto(framesDemoqaURL);
         expect(page).not.toBeNull();
         expect(await page.title()).not.toBeNull();
         expect(await page.title()).toBe('ToolsQA');

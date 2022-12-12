@@ -1,26 +1,26 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 
-const input_demoqa_URL = 'https://demoqa.com/text-box';
-const fullName_id = '#userName';
-const email_id = '#userEmail';
-const currentAddress_id = '#currentAddress';
-const permanentAddress_id = '#permanentAddress';
-const submitBtn_id = '#submit';
-const output_id = '#output';
-const nameOutput_id = '#name';
-const emailOutput_id = '#email';
-const currentAddressOutput_xpath = "xpath=//p[@id='currentAddress']";
-const permanentAddressOutput_xpath = "xpath=//p[@id='permanentAddress']";
+const inputDemoqaURL = 'https://demoqa.com/text-box';
+const fullNameId = '#userName';
+const emailId = '#userEmail';
+const currentAddressId = '#currentAddress';
+const permanentAddressId = '#permanentAddress';
+const submitBtnId = '#submit';
+const outputId = '#output';
+const nameOutputId = '#name';
+const emailOutputId = '#email';
+const currentAddressOutputXpath = "xpath=//p[@id='currentAddress']";
+const permanentAddressOutputXpath = "xpath=//p[@id='permanentAddress']";
 
-const label_fullName_id = '#userName-label';
-const label_email_id = '#userEmail-label';
-const label_currentAddress = '#currentAddress-label';
-const label_PermanentAddress = '#permanentAddress-label';
+const labelFullNameId = '#userName-label';
+const labelEmailId = '#userEmail-label';
+const labelCurrentAddress = '#currentAddress-label';
+const labelPermanentAddress = '#permanentAddress-label';
 
-const fullName_data = 'Test Playwright';
-const email_data = 'letmetest@tools.com';
-const currentAddress_data = 'here';
-const permanentAddress_data = 'there';
+const fullNameData = 'Test Playwright';
+const emailData = 'letmetest@tools.com';
+const currentAddressData = 'here';
+const permanentAddressData = 'there';
 
 describe('Interact with input fields', () => {
 
@@ -41,7 +41,7 @@ describe('Interact with input fields', () => {
     });
 
     beforeEach( async () => {
-        await page.goto(input_demoqa_URL);
+        await page.goto(inputDemoqaURL);
         expect(page).not.toBeNull();
         expect(await page.title()).not.toBeNull();
         expect(await page.title()).toBe('ToolsQA');
@@ -50,32 +50,32 @@ describe('Interact with input fields', () => {
     test('Enter data on text box page', async() => {
 
         // check labels:
-        expect(await page.innerText(label_fullName_id)).toBe('Full Name');
-        expect(await page.innerText(label_email_id)).toBe('Email');
-        expect(await page.innerText(label_currentAddress)).toBe('Current Address');
-        expect(await page.innerText(label_PermanentAddress)).toBe('Permanent Address');
+        expect(await page.innerText(labelFullNameId)).toBe('Full Name');
+        expect(await page.innerText(labelEmailId)).toBe('Email');
+        expect(await page.innerText(labelCurrentAddress)).toBe('Current Address');
+        expect(await page.innerText(labelPermanentAddress)).toBe('Permanent Address');
 
         // enter data in fields:
-        await page.locator(fullName_id).fill(fullName_data);
-        await page.locator(email_id).fill(email_data);
-        await page.locator(currentAddress_id).type(currentAddress_data);
-        await page.locator(permanentAddress_id).fill(permanentAddress_data);
+        await page.locator(fullNameId).fill(fullNameData);
+        await page.locator(emailId).fill(emailData);
+        await page.locator(currentAddressId).type(currentAddressData);
+        await page.locator(permanentAddressId).fill(permanentAddressData);
 
-        await page.locator(submitBtn_id).click();
+        await page.locator(submitBtnId).click();
 
-        await page.waitForSelector(output_id);
+        await page.waitForSelector(outputId);
 
-        expect(await page.innerText(nameOutput_id)).toContain(fullName_data);
-        expect(await page.innerText(emailOutput_id)).toContain(email_data);
-        expect(await page.innerText(currentAddressOutput_xpath)).toContain(currentAddress_data);
-        expect(await page.innerText(permanentAddressOutput_xpath)).toContain(permanentAddress_data);
+        expect(await page.innerText(nameOutputId)).toContain(fullNameData);
+        expect(await page.innerText(emailOutputId)).toContain(emailData);
+        expect(await page.innerText(currentAddressOutputXpath)).toContain(currentAddressData);
+        expect(await page.innerText(permanentAddressOutputXpath)).toContain(permanentAddressData);
 
     });
 
     test('Enter data and use optional chaining', async () => {
-        const name = await page.locator(fullName_id);
+        const name = await page.locator(fullNameId);
         // if name != null
-        await name?.fill(fullName_data);
+        await name?.fill(fullNameData);
 
     });
 

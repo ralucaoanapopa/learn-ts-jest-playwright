@@ -7,10 +7,10 @@ const loginURL = baseURL+'login';
 const profileURL = baseURL+'profile';
 const booksURL = baseURL+'books';
 
-const username_id = '#userName';
-const passwd_id = '#password';
-const loginBtn_id = '#login';
-const usernameValue_id = '#userName-value';
+const usernameId = '#userName';
+const passwdId = '#password';
+const loginBtnId = '#login';
+const usernameValueId = '#userName-value';
 
 // get credentials set as env variables
 const username: string = (process.env.USERNAME_TS as string);
@@ -41,9 +41,9 @@ describe('As registered user can login on Book Store from demoQA', () => {
         expect(await page.title()).not.toBeNull();
         expect(await page.title()).toBe('ToolsQA');
 
-        await page.fill(username_id, username);
-        await page.fill(passwd_id, password);
-        await page.click(loginBtn_id);
+        await page.fill(usernameId, username);
+        await page.fill(passwdId, password);
+        await page.click(loginBtnId);
         expect(page).not.toBeNull();
         expect(await page.title()).not.toBeNull();
         expect(await page.title()).toBe('ToolsQA');
@@ -51,7 +51,7 @@ describe('As registered user can login on Book Store from demoQA', () => {
         await page.waitForURL(profileURL);
         expect(page.url()).toBe(profileURL);
 
-        expect(await page.innerText(usernameValue_id)).toBe(username);
+        expect(await page.innerText(usernameValueId)).toBe(username);
 
         await page.click("text=Log out");
 

@@ -1,8 +1,8 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 import * as fs from 'fs';
 
-const books_demoqa_URL = 'https://demoqa.com/books';
-const book_img_xpath = "xpath=//img[@src='/images/bookimage3.jpg']";
+const booksDemoqaURL = 'https://demoqa.com/books';
+const bookImgXpath = "xpath=//img[@src='/images/bookimage3.jpg']";
 
 describe('Learn how to capture screenshots', () => {
 
@@ -15,7 +15,7 @@ describe('Learn how to capture screenshots', () => {
         context = await browser.newContext();
         page = await context.newPage();
 
-        await page.goto(books_demoqa_URL);
+        await page.goto(booksDemoqaURL);
         expect(page).not.toBeNull();
         expect(await page.title()).not.toBeNull();
         expect(await page.title()).toBe('ToolsQA');
@@ -36,7 +36,7 @@ describe('Learn how to capture screenshots', () => {
     });
 
     test('Should take screenshot for an element', async () => {
-        const book_img = await page.$$(book_img_xpath);
+        const book_img = await page.$$(bookImgXpath);
         await book_img[0]?.screenshot({ path: 'screenshots/'+ Date.now() +'-book.png' });
     });
 

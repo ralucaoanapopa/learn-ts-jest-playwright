@@ -1,22 +1,22 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 
 const baseURL = 'https://demoqa.com/';
-const browser_windows_demoqa_URL = baseURL + 'browser-windows';
-const sample_demoqa_URL = baseURL + 'sample';
+const browserWindowsDemoqa_URL = baseURL + 'browser-windows';
+const sampleDemoqaURL = baseURL + 'sample';
 
-const btn_newTab_id = '#tabButton';
-const h1_content_id = '#sampleHeading';
-const content_sample_page = 'This is a sample page';
+const btnNewTabId = '#tabButton';
+const h1ContentId = '#sampleHeading';
+const contentSamplePage = 'This is a sample page';
 
-const base_letcode_URL = 'https://letcode.in/';
-const windows_letcode_URL = base_letcode_URL + 'windows';
-const homepage_letcode_URL = base_letcode_URL + 'test';
-const signin_letcode_URL = base_letcode_URL + 'signin';
-const alert_letcode_URL = base_letcode_URL + 'alert';
-const dropdowns_letcode_URL = base_letcode_URL + 'dropdowns';
-const btn_home_id = '#home';
-const btn_multiple_id = '#multi';
-const btn_simple_alert_id = '#accept';
+const baseLetcodeURL = 'https://letcode.in/';
+const windowsLetcodeURL = baseLetcodeURL + 'windows';
+const homepageLetcodeURL = baseLetcodeURL + 'test';
+const signinLetcodeURL = baseLetcodeURL + 'signin';
+const alertLetcodeURL = baseLetcodeURL + 'alert';
+const dropdownsLetcodeURL = baseLetcodeURL + 'dropdowns';
+const btnHomeId = '#home';
+const btnMultipleId = '#multi';
+const btnSimpleAlertId = '#accept';
 
 describe('Window handling learning', () => {
 
@@ -38,34 +38,34 @@ describe('Window handling learning', () => {
     });
 
     test('Single page handling on demoqa', async () => {
-        await page.goto(browser_windows_demoqa_URL);
+        await page.goto(browserWindowsDemoqa_URL);
 
         const [newWindow] = await Promise.all([
             context.waitForEvent("page"),
-            await page.click(btn_newTab_id)
+            await page.click(btnNewTabId)
         ]);
         await newWindow.waitForLoadState();
-        expect(newWindow.url()).toBe(sample_demoqa_URL);
+        expect(newWindow.url()).toBe(sampleDemoqaURL);
 
-        expect(await newWindow.innerText(h1_content_id)).toBe(content_sample_page);
+        expect(await newWindow.innerText(h1ContentId)).toBe(contentSamplePage);
         await newWindow.close();
     });
 
     test('Single page handling on Letcode', async () => {
-        await page.goto(windows_letcode_URL);
+        await page.goto(windowsLetcodeURL);
 
         // dismiss consent to use data
         //await page.click('text="Do not consent"');
 
         const [newWindow] = await Promise.all([
             context.waitForEvent("page"),
-            await page.click(btn_home_id)
+            await page.click(btnHomeId)
         ]);
         await newWindow.waitForLoadState();
-        expect(newWindow.url()).toBe(homepage_letcode_URL);
+        expect(newWindow.url()).toBe(homepageLetcodeURL);
 
         await newWindow.click('text="Log in"');
-        expect(newWindow.url()).toBe(signin_letcode_URL);
+        expect(newWindow.url()).toBe(signinLetcodeURL);
         await page.bringToFront();
         await page.click('text="Product"');
 
@@ -73,25 +73,25 @@ describe('Window handling learning', () => {
     });
 
     test("Multipage handling on Letcode", async () => {
-        await page.goto(windows_letcode_URL);
+        await page.goto(windowsLetcodeURL);
 
         const [multipage] = await Promise.all([
             context.waitForEvent("page"),
-            await page.click(btn_multiple_id)
+            await page.click(btnMultipleId)
         ])
         await multipage.waitForLoadState();
-        const allwindows = page.context().pages();
+        const allWindows = page.context().pages();
 
-        expect(allwindows.length).toBe(3);
-        expect(allwindows[0].url()).toBe(windows_letcode_URL);
-        expect(allwindows[1].url()).toBe(alert_letcode_URL);
-        expect(allwindows[2].url()).toBe(dropdowns_letcode_URL);
+        expect(allWindows.length).toBe(3);
+        expect(allWindows[0].url()).toBe(windowsLetcodeURL);
+        expect(allWindows[1].url()).toBe(alertLetcodeURL);
+        expect(allWindows[2].url()).toBe(dropdownsLetcodeURL);
 
-        await allwindows[1].bringToFront();
-        allwindows[1].on("dialog", (dialog) => {
+        await allWindows[1].bringToFront();
+        allWindows[1].on("dialog", (dialog) => {
             dialog.accept();
         })
-        await allwindows[1].click(btn_simple_alert_id);
+        await allWindows[1].click(btnSimpleAlertId);
     });
 
 });
