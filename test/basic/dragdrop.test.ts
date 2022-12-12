@@ -1,15 +1,15 @@
 import { Browser, BrowserContext, chromium, Page } from "playwright";
 
-const drag_drop_URL = 'https://the-internet.herokuapp.com/drag_and_drop';
-const element_a_id = '#column-a';
-const element_b_id = '#column-b';
-const header_a_xpath = 'xpath=//div[@id="column-a"]/header';
-const header_b_xpath = 'xpath=//div[@id="column-b"]/header';
+const dragDropURL = 'https://the-internet.herokuapp.com/drag_and_drop';
+const elementAId = '#column-a';
+const elementBId = '#column-b';
+const headerAXpath = 'xpath=//div[@id="column-a"]/header';
+const headerBXpath = 'xpath=//div[@id="column-b"]/header';
 
-const drag_drop_jQuery_URL = 'https://jqueryui.com/droppable/';
-const elem_draggable_id = '#draggable';
-const elem_droppable_id = '#droppable';
-const dropped_xpath = 'xpath=//div[@id="droppable"]/p';
+const dragDropjQueryURL = 'https://jqueryui.com/droppable/';
+const elemDraggableId = '#draggable';
+const elemDroppableId = '#droppable';
+const droppedXpath = 'xpath=//div[@id="droppable"]/p';
 
 describe('Interact with drag and drop elements', () => {
 
@@ -30,13 +30,13 @@ describe('Interact with drag and drop elements', () => {
     });
 
     test('Drag element over another element', async () => {
-        await page.goto(drag_drop_URL);
+        await page.goto(dragDropURL);
         expect(page).not.toBeNull();
         expect(await page.title()).not.toBeNull();
         expect(await page.title()).toBe('The Internet');
 
-        const source = await page.$(element_a_id);
-        const dest = await page.$(element_b_id);
+        const source = await page.$(elementAId);
+        const dest = await page.$(elementBId);
 
         if (source && dest) {
             // get x, y coord
@@ -48,8 +48,8 @@ describe('Interact with drag and drop elements', () => {
                 await page.mouse.move(destBound.x, destBound.y);
                 await page.mouse.up();
 
-                expect(await page.innerText(header_a_xpath)).toBe('B');
-                expect(await page.innerText(header_b_xpath)).toBe('A');
+                expect(await page.innerText(headerAXpath)).toBe('B');
+                expect(await page.innerText(headerBXpath)).toBe('A');
             } else {
                 throw new Error("No element");
             }
@@ -57,14 +57,14 @@ describe('Interact with drag and drop elements', () => {
     });
 
     test('Drag and drop on jQuery website', async () => {
-        await page.goto(drag_drop_jQuery_URL);
+        await page.goto(dragDropjQueryURL);
         expect(page).not.toBeNull();
         expect(await page.title()).toBe('Droppable | jQuery UI');
 
         const frame = page.frame({url: "/resources/demos/droppable/default.html"});
         if ( frame != null){
-            const source = await frame.$(elem_draggable_id);
-            const dest = await frame.$(elem_droppable_id);        
+            const source = await frame.$(elemDraggableId);
+            const dest = await frame.$(elemDroppableId);        
 
             if (source && dest) {
                 // get x, y coord
@@ -76,7 +76,7 @@ describe('Interact with drag and drop elements', () => {
                     await page.mouse.move(destBound.x, destBound.y);
                     await page.mouse.up();
 
-                    expect(await page.innerText(dropped_xpath)).toBe('Dropped!');
+                    expect(await page.innerText(droppedXpath)).toBe('Dropped!');
                 } else {
                     throw new Error("No element");
                 }
