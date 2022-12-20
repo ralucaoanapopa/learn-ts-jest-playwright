@@ -1,5 +1,5 @@
 import { Page } from "playwright";
-import * as data from '../data/variables.json';
+import * as data from '../../data/variables.json';
 
 export default class BasePage {
     public page: Page;

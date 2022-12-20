@@ -1,7 +1,7 @@
 import { Browser, BrowserContext, chromium, Page } from 'playwright';
-import LoginPage from '../../page/loginSaucePage';
-import InventoryPage from '../../page/inventorySaucePage';
-import * as data from '../../data/saucedemo.json';
+import LoginPage from './pages/loginSaucePage';
+import InventoryPage from './pages/inventorySaucePage';
+import * as data from '../data/saucedemo.json';
 import * as dotenv from 'dotenv'
 dotenv.config()
 
